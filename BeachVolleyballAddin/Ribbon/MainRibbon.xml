@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="TabBeachVolley" insertAfterMso="TabReview" label="Beach Volley">
+        <group id="grpBeachVolley"
+               label="Beach Volley Data">
+          <button id=" btnTournamentRankingData" 
+                  onAction="btnTournamentRangingData_Click"
+                  label="Get Tournaments Standings Data" 
+                  imageMso="HappyFace"
+                  size="large" 
+                  screentip="Gets data from fivb.12ndr.at"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
