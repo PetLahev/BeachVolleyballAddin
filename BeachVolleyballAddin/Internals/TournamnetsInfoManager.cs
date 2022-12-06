@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BeachVolleyballAddin.Internals
@@ -23,12 +19,12 @@ namespace BeachVolleyballAddin.Internals
                 foreach (var tournament in parser.Tournaments)
                 {
                     if (tournament.HasMen)
-                    {
+                    {                        
                         tournament.StandingsMen.AddRange(parser.GetTournamentRankingTable(tournament.MenLink));
                     }
 
                     if (tournament.HasWomen)
-                    {
+                    {                        
                         tournament.StandingsWomen.AddRange(parser.GetTournamentRankingTable(tournament.WomenLink));
                     }
                 }

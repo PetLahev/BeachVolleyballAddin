@@ -161,6 +161,7 @@
   <ItemGroup>
     <Compile Include="Data\RankingTable.cs" />
     <Compile Include="Data\TournamentInfo.cs" />
+    <Compile Include="Internals\RankingTablesLoader.cs" />
     <Compile Include="Internals\TournamnetsInfoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -176,6 +177,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="BeachVolleyballAddin_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -185,6 +187,7 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Service\IWebScraper.cs" />
     <Compile Include="Service\WebScraper.cs" />
@@ -214,7 +217,7 @@
     <ManifestKeyFile>BeachVolleyballAddin_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>66C9EDA18D48AE42C9C052BA056B4893548EA4D4</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>37EBE1C70CE6982145096B221C41FE8A30A78605</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

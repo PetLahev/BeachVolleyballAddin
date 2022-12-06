@@ -4,6 +4,7 @@ using BeachVolleyballAddin.Data;
 using HtmlAgilityPack;
 using System.Linq;
 using System.Collections.Generic;
+using BeachVolleyballAddin.Internals;
 
 namespace BeachVolleyballAddin.Tournaments
 {
@@ -21,12 +22,12 @@ namespace BeachVolleyballAddin.Tournaments
 
         internal List<TournamentInfo> Tournaments = new List<TournamentInfo>();
 
-        internal void GetTournamentsData()
+        internal void GetTournamentsData(string tournamentCategory = "fivb")
         {
             HtmlDocument doc = null;
             try
             {
-                var tbl = ServiceMngr.GetAllTournaments(2022, "fivb");
+                var tbl = ServiceMngr.GetAllTournaments(2022, tournamentCategory);
                 doc = new HtmlDocument();
                 doc.LoadHtml(tbl);
             }
@@ -79,9 +80,11 @@ namespace BeachVolleyballAddin.Tournaments
 
         internal List<RankingTable> GetTournamentRankingTable(string url)
         {
-            List<RankingTable> data = new List<RankingTable>();
+            List<RankingTable> data = GetSavedRankingTable(url);
+            if (data != null) return data; 
             try
             {
+                data = new List<RankingTable>();
                 var rankingTable = GetTournamentData(url).SingleOrDefault(x => x.Id.ToLower().Equals("ranking_table"));
                 if (rankingTable == null) return data;
 
@@ -100,7 +103,7 @@ namespace BeachVolleyballAddin.Tournaments
                         lastRanking = ranking;
                     }
                     var tmp = new RankingTable()
-                    {                        
+                    {
                         Ranking = ranking,
                         Team = info[1].InnerText,
                         Country = info[2].InnerText,
@@ -108,14 +111,19 @@ namespace BeachVolleyballAddin.Tournaments
                         Earnings = info[5].InnerText
                     };
                     data.Add(tmp);
-
                 }
+                new RankingTablesLoader().SaveRankingTable(url, data);
             }
             catch (Exception)
             {
                 throw;
             }
             return data;
+        }
+
+        internal List<RankingTable> GetSavedRankingTable(string url)
+        {
+            return new RankingTablesLoader().LoadRankingTable(url);
         }
 
         private HtmlNode GetTableBody(HtmlDocument doc)

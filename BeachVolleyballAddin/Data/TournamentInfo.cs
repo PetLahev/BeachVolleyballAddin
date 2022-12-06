@@ -1,30 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace BeachVolleyballAddin.Data
-{
-    internal class TournamentInfo
+{    
+    public class TournamentInfo
     {
-        internal int  Index { get; set; }
-        internal string Name { get; set;}
-        internal string Type { get; set; }
-        internal string Country { get; set; }
-        internal string MenLink { get; set; }
-        internal string WomenLink { get; set; }
-        internal bool HasMen
+        [XmlElement]
+        public string Version { get; set; }
+        [XmlElement]
+        public int  Index { get; set; }
+        [XmlElement]
+        public string Name { get; set;}
+        [XmlElement]
+        public string Type { get; set; }
+        [XmlElement]
+        public string Country { get; set; }
+        [XmlElement]
+        public string MenLink { get; set; }
+        [XmlElement]
+        public string WomenLink { get; set; }
+        [XmlIgnore]
+        public bool HasMen
         {
             get { return !string.IsNullOrWhiteSpace(MenLink); }
         }
-        internal bool HasWomen
+        [XmlIgnore]
+        public bool HasWomen
         {
             get { return !string.IsNullOrWhiteSpace(WomenLink); }
         }
 
-        internal List<RankingTable> StandingsMen { get; set; } = new List<RankingTable>();
-        internal List<RankingTable> StandingsWomen { get; set; } = new List<RankingTable>();
+        public List<RankingTable> StandingsMen { get; set; } = new List<RankingTable>();
+        public List<RankingTable> StandingsWomen { get; set; } = new List<RankingTable>();
 
         public override string ToString()
         {
